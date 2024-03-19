@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -33,6 +35,26 @@ class Java16Tests {
         );
     }
 
-    // TODO: add more examples on records with its final-release features
+    @Test
+    void pattern_matching_for_instance_of() {
+        String label = "Just a Demo";
+
+        Object objectLabel = label;
+
+        if (objectLabel instanceof String value) {
+            System.out.println("Value is: " + value);
+        }
+
+        if (!(objectLabel instanceof String anotherValue)) {
+            // System.out.println("Value is " + value);  // compilation error
+            System.out.println("Just kidding!!");
+        }
+
+        if (objectLabel instanceof String andAnothervalue && andAnothervalue.length() > 5) {
+            System.out.println("I pass every if condition!!!");
+        }
+
+
+    }
 
 }

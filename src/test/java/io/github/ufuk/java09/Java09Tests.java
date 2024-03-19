@@ -43,7 +43,9 @@ class Java09Tests {
     @Test
     void try_with_resources_external_autocloseable_instance_if_effectively_final() {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("test1.txt");
-        try (inputStream) {
+//        inputStream = getClass().getClassLoader().getResourceAsStream("test1.txt"); // compilation error: 'inputStream' isnot effectively final
+        // ...some other code
+        try (inputStream) { // instead of: try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("test1.txt"))
             String fileContent = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
 
             System.out.println(fileContent);

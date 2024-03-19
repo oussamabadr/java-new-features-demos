@@ -3,6 +3,10 @@ package io.github.ufuk.java10;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -17,16 +21,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class Java10Tests {
 
     @Test
-    void local_variable_type_inference() {
+    void local_variable_type_inference() throws FileNotFoundException {
         // before
         String oldLocalText = "Hello var";
-
         Map<String, String> anOldLocalMap = Map.of("key", "value");
+        Set<String> anOldSet = Set.of("Item_1", "Item_2", "Item_3");
+        BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream("c:\\data\\output-file.txt"));
 
         // after
         var newLocalText = "Hello var";
-
         var aNewLocalMap = Map.of("key", "value");
+        var aSet = Set.of("Item_1", "Item_2", "Item_3");
+        var aOutputStream = new BufferedOutputStream(new FileOutputStream("c:\\data\\output-file.txt"));
     }
 
     @Test

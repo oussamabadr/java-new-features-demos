@@ -216,12 +216,33 @@ class Java21Tests {
 
     @Test
     void unnamed_variables() { // preview in Java 21, released in Java ?
-        Assertions.fail("No example presents"); // TODO: add example(s)
+        Set<Integer> numbers = Set.of(1, 2, 3, 4, 5);
+
+        for (Integer _ : numbers) {
+            System.out.println("Hello World!");
+        }
     }
 
+//    unnamed_patterns review in Java 21
+    sealed interface Employee permits Salaried, Freelancer, Intern { }
+    record Salaried(String name, long salary) implements Employee { }
+    record Freelancer(String name) implements Employee { }
+    record Intern(String name) implements Employee { }
+
+    private void printSalary(Employee b) {
+        switch (b) { // no default case, coz we are using a sealed interface
+            case Salaried r   -> System.out.println("Salary: " + r.salary());
+            case Freelancer _ -> System.out.println("Other");
+            case Intern _     -> System.out.println("Other");
+        }
+    }
     @Test
-    void unnamed_patterns() { // preview in Java 21, released in Java ?
-        Assertions.fail("No example presents"); // TODO: add example(s)
+    void unnamed_patterns() {
+        Salaried salaried = new Salaried("Unknown", 1_000_000_000L);
+        Freelancer freelancer = new Freelancer("Wanted");
+        Freelancer intern = new Freelancer("Geek");
+
+        Set.of(salaried, freelancer, intern).forEach(this::printSalary);
     }
 
 }
